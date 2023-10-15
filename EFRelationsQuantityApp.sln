@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33801.468
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFRelationsQuantityApp", "EFRelationsQuantityApp\EFRelationsQuantityApp.csproj", "{B9E91102-5AC5-4B73-877B-C3CE33239926}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B9E91102-5AC5-4B73-877B-C3CE33239926}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9E91102-5AC5-4B73-877B-C3CE33239926}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9E91102-5AC5-4B73-877B-C3CE33239926}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9E91102-5AC5-4B73-877B-C3CE33239926}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DF9CB3F9-9BDB-4708-9620-5AB1B2800658}
+	EndGlobalSection
+EndGlobal
