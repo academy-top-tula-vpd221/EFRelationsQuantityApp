@@ -18,5 +18,7 @@ namespace EFRelationsQuantityApp
         public Company? Company { get; set; }
 
         public List<Project>? Projects { get; set; } = new();
+        public List<DateMark> DateMarks { get; set; } = new();
+
     }
 }

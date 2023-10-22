@@ -12,6 +12,7 @@ namespace EFRelationsQuantityApp
         public DbSet<Employee> Employees { get; set; }
         public DbSet<EmployeeProfile> EmployeeProfiles { get; set; }
         public DbSet<Company> Companies { get; set; }
+        public DbSet<Project> Projects { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -22,6 +23,14 @@ namespace EFRelationsQuantityApp
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            //modelBuilder.Entity<Employee>().ToTable("EmployeesFull");
+            //modelBuilder.Entity<EmployeeProfile>().ToTable("EmployeesFull");
+
+            //modelBuilder.Entity<Employee>()
+            //            .HasOne(e => e.Profile)
+            //            .WithOne(p => p.Employee)
+            //            .HasForeignKey<EmployeeProfile>(p => p.EmployeeId);
 
             modelBuilder.Entity<EmployeeProfile>()
                         .HasOne(p => p.Employee)
@@ -34,21 +43,37 @@ namespace EFRelationsQuantityApp
                         .HasForeignKey(e => e.CompanyId)
                         .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<Employee>()
-                        .HasMany(e => e.Projects)
-                        .WithMany(p => p.Employees)
-                        .UsingEntity(ep => ep.ToTable("EmployeeProject"));
+            //modelBuilder.Entity<Employee>()
+            //            .HasMany(e => e.Projects)
+            //            .WithMany(p => p.Employees)
+            //            .UsingEntity(ep => ep.ToTable("EmployeeProject"));
 
+
+            modelBuilder
+                .Entity<Project>()
+                .HasMany(p => p.Employees)
+                .WithMany(e => e.Projects)
+                .UsingEntity<DateMark>(
+                    key => key
+                            .HasOne(dm => dm.Employee)
+                            .WithMany(empl => empl.DateMarks)
+                            .HasForeignKey(dm => dm.EmployeeId),
+                    key => key
+                            .HasOne(dm => dm.Project)
+                            .WithMany(pr => pr.DateMarks)
+                            .HasForeignKey(dm => dm.ProjectId),
+                    dm =>
+                    {
+                        dm.Property(dm => dm.Mark)
+                          .HasDefaultValue(DateTime.Now);
+                        dm.HasKey(dm => new { dm.ProjectId, dm.EmployeeId });
+                        dm.ToTable("EmployeeProjectMark");
+                    }
+                );
                         
 
 
-            //modelBuilder.Entity<Employee>().ToTable("EmployeesFull");
-            //modelBuilder.Entity<EmployeeProfile>().ToTable("EmployeesFull");
-
-            //modelBuilder.Entity<Employee>()
-            //            .HasOne(e => e.Profile)
-            //            .WithOne(p => p.Employee)
-            //            .HasForeignKey<EmployeeProfile>(p => p.EmployeeId);
+            
 
 
         }
